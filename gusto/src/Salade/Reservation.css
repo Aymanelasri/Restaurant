@@ -1,0 +1,433 @@
+/* Mobile-First Responsive Design */
+.reservation-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #b11217 0%, #f4b400 100%);
+  padding: 80px 15px 30px;
+}
+
+.reservation-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reservation-container h1 {
+  text-align: center;
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.reservation-header {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.reservation-header h1 {
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.user-info span {
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  font-size: 14px;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  min-height: 44px;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.reservation-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+.restaurant-layout {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.restaurant-layout h3 {
+  color: #b11217;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.floor-plan {
+  position: relative;
+  height: 300px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border: 2px dashed #ddd;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.table {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 10px;
+  font-weight: 600;
+  touch-action: manipulation;
+}
+
+.table.available {
+  background: #28a745;
+  color: white;
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.table.occupied {
+  background: #dc3545;
+  color: white;
+  cursor: not-allowed;
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.table.selected {
+  background: #f4b400;
+  color: #b11217;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(244, 180, 0, 0.5);
+}
+
+.table:hover.available {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
+}
+
+.table-number {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.table-seats {
+  font-size: 8px;
+  opacity: 0.9;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  justify-content: center;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-color.available {
+  background: #28a745;
+}
+
+.legend-color.occupied {
+  background: #dc3545;
+}
+
+.legend-color.selected {
+  background: #f4b400;
+}
+
+.table.royal {
+  background: linear-gradient(45deg, #d4af37, #f4d03f);
+  color: #2c1810;
+  border: 2px solid #b8941f;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.royal-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 12px;
+}
+
+.legend-color.royal {
+  background: linear-gradient(45deg, #d4af37, #f4d03f);
+}
+
+.reservation-form {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.reservation-form h3 {
+  color: #b11217;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  min-height: 44px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #f4b400;
+  box-shadow: 0 0 0 3px rgba(244, 180, 0, 0.1);
+}
+
+.success-message {
+  background: #d4edda;
+  border: 1px solid #28a745;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.success-message p {
+  margin: 0;
+  color: #155724;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.error-message {
+  background: #f8d7da;
+  border: 1px solid #dc3545;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.error-message p {
+  margin: 0;
+  color: #721c24;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.selected-table-info {
+  background: #e8f5e8;
+  border: 1px solid #28a745;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.selected-table-info p {
+  margin: 0;
+  color: #28a745;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reserve-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #b11217, #f4b400);
+  border: none;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  touch-action: manipulation;
+}
+
+.reserve-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #f4b400, #b11217);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(177, 18, 23, 0.3);
+}
+
+.reserve-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+  .reservation-page {
+    padding: 100px 30px 50px;
+  }
+  
+  .reservation-container h1 {
+    font-size: 2.2rem;
+  }
+  
+  .reservation-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .reservation-content {
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+  }
+  
+  .restaurant-layout,
+  .reservation-form {
+    padding: 30px;
+  }
+  
+  .floor-plan {
+    height: 400px;
+  }
+  
+  .table {
+    width: 60px;
+    height: 60px;
+    font-size: 12px;
+  }
+  
+  .table-number {
+    font-size: 14px;
+  }
+  
+  .table-seats {
+    font-size: 10px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .legend-item {
+    font-size: 14px;
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .reservation-page {
+    padding: 120px 50px 60px;
+  }
+  
+  .reservation-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+  
+  .reservation-header {
+    margin-bottom: 40px;
+  }
+  
+  .user-info span {
+    font-size: 16px;
+  }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (max-width: 767px) {
+  .table {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .logout-btn,
+  .reserve-btn {
+    min-height: 44px;
+  }
+  
+  /* Prevent zoom on input focus */
+  .form-group input,
+  .form-group select {
+    font-size: 16px;
+  }
+}

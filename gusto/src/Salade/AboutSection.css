@@ -1,0 +1,114 @@
+.about-section {
+  padding: 48px 20px;
+  background: transparent;
+}
+
+.about-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.about-left { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.chef-wrap { 
+  position: relative; 
+  width: 360px; 
+  height: 360px; 
+  border-radius: 50%; 
+  overflow: hidden; 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: #F5DEB3;
+}
+
+.chef-img { 
+  width: 110%; 
+  height: 110%; 
+  object-fit: cover; 
+  transform: translateY(-6%); 
+}
+
+.badge { 
+  position: absolute; 
+  width: 54px; 
+  height: 54px; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: #8B4513; 
+  color: white;
+  font-size: 20px;
+}
+
+.badge-top { left: -12px; top: -12px; }
+.badge-bottom { right: -8px; bottom: -8px; }
+
+.about-right h2 { 
+  font-size: 28px; 
+  margin: 0 0 12px 0; 
+  font-weight: 800; 
+  color: #2c1810;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+}
+
+.about-right .lead { 
+  color: #2c1810; 
+  margin: 0 0 18px 0; 
+  max-width: 620px;
+  font-weight: 400;
+  text-shadow: 1px 4px 7px rgba(255,255,255,0.2);
+}
+
+.features { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0 0 20px 0; 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 12px 18px; 
+}
+
+.features li { 
+  display: flex; 
+  gap: 12px; 
+  align-items: center; 
+  color: #2c1810;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+}
+
+.f-icon { 
+  display: inline-flex; 
+  width: 36px; 
+  height: 36px; 
+  align-items: center; 
+  justify-content: center; 
+  background: #8B4513; 
+  border-radius: 8px; 
+  font-size: 16px; 
+  color: white;
+}
+
+@media (max-width: 980px) {
+  .about-inner { 
+    grid-template-columns: 1fr; 
+    text-align: center; 
+  }
+  .about-left { order: 0; }
+  .about-right { order: 1; }
+  .features { 
+    grid-template-columns: 1fr; 
+    justify-items: center; 
+  }
+}

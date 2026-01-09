@@ -1,0 +1,131 @@
+/* Styles for Meet Our Chefs section */
+.chef-section {
+  padding: 20px 24px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.chef-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.chef-header h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 2.7rem;
+  
+  margin: 0;
+  color: #2c1810;
+  font-weight: 800;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+  text-align: center;
+}
+
+.chef-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.chef-arrow {
+  background: #ffd89b;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(216, 158, 89, 0.18);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.chef-arrow-left {
+  transform: rotate(180deg);
+}
+
+
+:root { --chef-gap: 22px; }
+.chef-scroller {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  padding: 20px 0 30px 0;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  justify-content: flex-start;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.chef-scroller::-webkit-scrollbar { 
+  height: 0; 
+  display: none; 
+}
+
+.chef-scroller::-webkit-scrollbar-thumb { 
+  background: transparent; 
+}
+
+.chef-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fffdfb 100%);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 10px 20px rgba(98, 70, 54, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 calc((100% - 90px) / 4);
+  scroll-snap-align: start;
+  min-width: 200px;
+}
+
+.chef-photo-wrap {
+  width: 160px;
+  height: 160px;
+  background: rgba(245,245,245,0.9);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.chef-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.chef-name {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+  font-size: 16px;
+  color: #4a3b36;
+  text-align: center;
+}
+
+
+
+@media (min-width: 1024px) {
+  .chef-section { padding: 60px 48px; }
+  :root { --chef-gap: 28px; }
+  .chef-photo-wrap { width: 180px; height: 180px; }
+}
+
+@media (max-width: 900px) {
+  .chef-card {
+    flex: 0 0 48%;
+  }
+}
+
+@media (max-width: 520px) {
+  .chef-card {
+    flex: 0 0 80%;
+  }
+}

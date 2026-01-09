@@ -1,0 +1,32 @@
+{
+  "modules": [
+    {
+      "id": 11,
+      "nom": "Langage Java",
+      "coefficient": 3,
+      "masse_horaire": 120,
+      "filiere": 1
+    },
+    {
+      "id": 22,
+      "nom": "POO",
+      "coefficient": 3,
+      "masse_horaire": 120,
+      "filiere": 3
+    },
+    {
+      "id": 33,
+      "nom": "Algo",
+      "coefficient": 2,
+      "masse_horaire": 100,
+      "filiere": 2
+    },
+    {
+      "id": 44,
+      "nom": "MERISE",
+      "coefficient": 1,
+      "masse_horaire": 60,
+      "filiere": 1
+    }
+  ]
+}
