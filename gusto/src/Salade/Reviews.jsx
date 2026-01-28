@@ -83,7 +83,7 @@ export default function Reviews() {
         </p>
 
         {/* Reviews list */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24, marginTop: 40 }}>
+        <div style={{ display: 'grid', gap: 24, marginTop: 40 }}>
           {reviews.map((r, i) => (
             <div key={i} style={{ background: '#fff', padding: 25, borderRadius: 15, boxShadow: '0 8px 25px rgba(0,0,0,0.1)', textAlign: 'left' }}>
               <div style={{ marginBottom: 10 }}>

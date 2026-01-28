@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import apiService from '../services/apiService.js';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ users: 0, orders: 0, reservations: 0, revenue: 0 });
@@ -16,19 +15,20 @@ export default function Dashboard() {
     try {
       setLoading(true);
       
-      // Load orders and reservations using API service
-      const [ordersData, reservationsData] = await Promise.all([
-        apiService.getOrders().catch(() => []),
-        apiService.getReservations().catch(() => [])
-      ]);
+      // Test direct fetch without authentication
+      const ordersResponse = await fetch('http://localhost:8000/api/orders');
+      const reservationsResponse = await fetch('http://localhost:8000/api/reservations');
       
-      const orders = Array.isArray(ordersData) ? ordersData : [];
-      const reservations = Array.isArray(reservationsData) ? reservationsData : [];
+      const orders = ordersResponse.ok ? await ordersResponse.json() : [];
+      const reservations = reservationsResponse.ok ? await reservationsResponse.json() : [];
       
-      setOrders(orders);
-      setReservations(reservations);
+      console.log('Orders:', orders);
+      console.log('Reservations:', reservations);
+      
+      setOrders(Array.isArray(orders) ? orders : []);
+      setReservations(Array.isArray(reservations) ? reservations : []);
 
-      // Calculate revenue
+      // Calculate revenue from real data
       const revenue = orders.reduce((sum, order) => sum + parseFloat(order.total_amount || 0), 0);
 
       setStats({
@@ -41,7 +41,7 @@ export default function Dashboard() {
       setLoading(false);
     } catch (err) {
       console.error('Error:', err);
-      setError('Vérifiez que le serveur Gusto Backend est démarré (php artisan serve)');
+      setError('Backend gustobackend non démarré - Lancez: php artisan serve');
       setLoading(false);
     }
   };

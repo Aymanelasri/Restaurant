@@ -83,7 +83,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
               border: '1px solid rgba(255,255,255,0.2)'
             }}
           >
-            {open ? 'Réduire' : '☰'}
+            {open ? 'X' : '☰'}
           </button>
         )}
       </div>

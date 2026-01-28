@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Footer from './Footer';
 
 export default function Blog() {
   const [expandedPost, setExpandedPost] = useState(null);
@@ -34,7 +35,7 @@ export default function Blog() {
     setExpandedPost(expandedPost === index ? null : index);
   };
 
-  return (
+  return ( <>
     <section style={{
       padding: 'clamp(100px, 15vw, 120px) clamp(16px, 5vw, 32px) 60px',
       minHeight: '100vh'
@@ -110,5 +111,7 @@ export default function Blog() {
         </div>
       </div>
     </section>
+    <Footer />
+    </> 
   );
 }

@@ -1,6 +1,14 @@
 .about-section {
   padding: 48px 20px;
   background: transparent;
+  margin-top: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.about-section.py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .about-inner {
@@ -10,6 +18,7 @@
   grid-template-columns: 420px 1fr;
   gap: 36px;
   align-items: center;
+  width: 100%;
 }
 
 .about-left { 
@@ -55,19 +64,25 @@
 .badge-bottom { right: -8px; bottom: -8px; }
 
 .about-right h2 { 
-  font-size: 28px; 
-  margin: 0 0 12px 0; 
+  font-size: 2rem; 
+  margin: 0 0 24px 0; 
   font-weight: 800; 
   color: #2c1810;
   text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.2;
 }
 
 .about-right .lead { 
   color: #2c1810; 
-  margin: 0 0 18px 0; 
+  margin: 0 0 28px 0; 
   max-width: 620px;
   font-weight: 400;
-  text-shadow: 1px 4px 7px rgba(255,255,255,0.2);
+  text-shadow: 2px 4px 7px rgba(255,255,255,0.2);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.9;
+  font-family: 'Roboto', sans-serif;
 }
 
 .features { 
@@ -76,7 +91,7 @@
   margin: 0 0 20px 0; 
   display: grid; 
   grid-template-columns: 1fr 1fr; 
-  gap: 12px 18px; 
+  gap: 16px 24px; 
 }
 
 .features li { 
@@ -86,6 +101,8 @@
   color: #2c1810;
   font-weight: 500;
   text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 .f-icon { 
@@ -101,14 +118,319 @@
 }
 
 @media (max-width: 980px) {
+  .about-section {
+    padding: 30px 20px;
+    margin-top: -10px;
+  }
+  
   .about-inner { 
     grid-template-columns: 1fr; 
-    text-align: center; 
+    text-align: center;
+    gap: 30px;
   }
+  
   .about-left { order: 0; }
   .about-right { order: 1; }
+  
+  .chef-wrap {
+    width: 300px;
+    height: 300px;
+  }
+  
   .features { 
     grid-template-columns: 1fr; 
     justify-items: center; 
+  }
+  
+  .about-right h2 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 35px 15px;
+    margin-bottom: 40px;
+  }
+  
+  .about-inner {
+    gap: 25px;
+  }
+  
+  .chef-wrap {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .chef-img {
+    width: 110%;
+    height: 110%;
+  }
+  
+  .badge {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+  
+  .badge-top { left: -8px; top: -8px; }
+  .badge-bottom { right: -4px; bottom: -4px; }
+  
+  .about-right h2 {
+    font-size: 2rem;
+    margin: 0 0 15px 0;
+  }
+  
+  .about-right .lead {
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+  }
+  
+  .features {
+    gap: 10px 15px;
+  }
+  
+  .features li {
+    font-size: 0.95rem;
+    gap: 10px;
+  }
+  
+  .f-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-section {
+    padding: 30px 12px;
+    margin-top: -20px;
+    margin-bottom: 50px;
+  }
+  
+  .about-inner {
+    gap: 20px;
+  }
+  
+  .chef-wrap {
+    width: 240px;
+    height: 240px;
+  }
+  
+  .badge {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+  
+  .badge-top { left: -6px; top: -6px; }
+  .badge-bottom { right: -2px; bottom: -2px; }
+  
+  .about-right h2 {
+    font-size: 1.8rem;
+    margin: 0 0 12px 0;
+  }
+  
+  .about-right .lead {
+    font-size: 0.95rem;
+    margin: 0 0 16px 0;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+    gap: 8px 12px;
+    max-width: 100%;
+  }
+  
+  .features li {
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+  
+  .f-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    padding: 18px 10px;
+    margin-top: -25px;
+    margin-bottom: 60px;
+  }
+  
+  .about-inner {
+    gap: 15px;
+  }
+  
+  .chef-wrap {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .chef-img {
+    width: 110%;
+    height: 110%;
+    transform: translateY(-6%);
+  }
+  
+  .badge {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+  
+  .badge-top { left: -4px; top: -4px; }
+  .badge-bottom { right: 0px; bottom: 0px; }
+  
+  .about-right h2 {
+    font-size: 1.6rem;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+  }
+  
+  .about-right .lead {
+    font-size: 0.9rem;
+    margin: 0 0 14px 0;
+    line-height: 1.4;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+    gap: 6px 10px;
+  }
+  
+  .features li {
+    font-size: 0.85rem;
+    gap: 6px;
+  }
+  
+  .f-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  .about-section {
+    padding: 15px 8px;
+    margin-top: -30px;
+  }
+
+  .about-section.py-5 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .chef-wrap {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .chef-img {
+    width: 110%;
+    height: 110%;
+  }
+  
+  .badge {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+  
+  .badge-top { left: -2px; top: -2px; }
+  .badge-bottom { right: 2px; bottom: 2px; }
+  
+  .about-right h2 {
+    font-size: 1.4rem;
+    margin: 0 0 8px 0;
+  }
+  
+  .about-right .lead {
+    font-size: 0.85rem;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+  }
+  
+  .features li {
+    font-size: 0.8rem;
+  }
+  
+  .f-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 320px) {
+  .about-section {
+    padding: 12px 6px;
+    margin-top: -35px;
+  }
+
+  .about-section.py-5 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .about-inner {
+    gap: 12px;
+  }
+  
+  .chef-wrap {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .chef-img {
+    width: 110%;
+    height: 110%;
+  }
+  
+  .badge {
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
+  }
+  
+  .badge-top { left: 0px; top: 0px; }
+  .badge-bottom { right: 4px; bottom: 4px; }
+  
+  .about-right h2 {
+    font-size: 1.2rem;
+    margin: 0 0 6px 0;
+    font-weight: 600;
+  }
+  
+  .about-right .lead {
+    font-size: 0.8rem;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+  }
+  
+  .features {
+    gap: 4px 8px;
+  }
+  
+  .features li {
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+  
+  .f-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+    border-radius: 4px;
   }
 }

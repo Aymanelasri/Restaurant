@@ -119,13 +119,39 @@
 }
 
 @media (max-width: 900px) {
+  .chef-section {
+    margin-bottom: 40px;
+  }
+  
   .chef-card {
     flex: 0 0 48%;
   }
 }
 
 @media (max-width: 520px) {
+  .chef-section {
+    margin-bottom: 50px;
+  }
+  
   .chef-card {
     flex: 0 0 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .chef-section {
+    margin-bottom: 60px;
+  }
+}
+
+@media (max-width: 380px) {
+  .chef-section {
+    margin-bottom: 70px;
+  }
+}
+
+@media (max-width: 320px) {
+  .chef-section {
+    margin-bottom: 80px;
   }
 }

@@ -181,31 +181,316 @@
 }
 
 /* Responsive */
+@media (max-width: 992px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
 @media (max-width: 768px) {
+  .footer {
+    padding: 40px 0 0 0;
+    margin-top: 60px;
+  }
+  
   .footer-content {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
     text-align: center;
+    padding: 0 15px;
+  }
+  
+  .footer-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  .brand-name {
+    font-size: 1.6rem;
+  }
+  
+  .footer-desc {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
   }
   
   .newsletter-form {
     flex-direction: column;
     gap: 10px;
+    max-width: 300px;
+    margin: 0 auto 20px;
   }
   
   .newsletter-form input,
   .newsletter-form button {
     border-radius: 25px;
+    width: 100%;
   }
   
   .social-icons {
     justify-content: center;
   }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  
+  .contact-info {
+    align-items: center;
+  }
+  
+  .contact-item {
+    justify-content: center;
+    font-size: 0.9rem;
+  }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 0 0 0;
+    margin-top: 40px;
+  }
+  
   .footer-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    padding: 0 10px;
+    gap: 20px;
+  }
+  
+  .footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+  
+  .brand {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .brand-icon {
+    font-size: 1.6rem;
+  }
+  
+  .brand-name {
+    font-size: 1.4rem;
+  }
+  
+  .footer-desc {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+  
+  .newsletter h4 {
+    margin-bottom: 10px;
+  }
+  
+  .newsletter-form {
+    max-width: 280px;
+    margin-bottom: 15px;
+  }
+  
+  .newsletter-form input {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .newsletter-form button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .social-icons {
+    gap: 12px;
+  }
+  
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-section ul li a {
+    font-size: 0.9rem;
+  }
+  
+  .contact-item {
+    font-size: 0.85rem;
+    gap: 10px;
+  }
+  
+  .contact-item i {
+    width: 18px;
+    font-size: 0.9rem;
+  }
+  
+  .footer-bottom {
+    padding: 15px 0;
+    margin-top: 30px;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.85rem;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .footer {
+    padding: 25px 0 0 0;
+    margin-top: 30px;
+  }
+  
+  .footer-content {
+    padding: 0 8px;
+    gap: 15px;
+  }
+  
+  .footer-section h4 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  
+  .brand-icon {
+    font-size: 1.4rem;
+    margin-right: 8px;
+  }
+  
+  .brand-name {
+    font-size: 1.2rem;
+  }
+  
+  .footer-desc {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+  }
+  
+  .newsletter-form {
+    max-width: 250px;
+  }
+  
+  .newsletter-form input,
+  .newsletter-form button {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .social-icons {
+    gap: 10px;
+  }
+  
+  .social-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+  
+  .footer-section ul li a {
+    font-size: 0.8rem;
+  }
+  
+  .contact-item {
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+  
+  .contact-item i {
+    width: 16px;
+    font-size: 0.8rem;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .footer {
+    padding: 20px 0 0 0;
+    margin-top: 25px;
+  }
+  
+  .footer-content {
+    padding: 0 6px;
+    gap: 12px;
+  }
+  
+  .footer-section h4 {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  
+  .brand-icon {
+    font-size: 1.2rem;
+    margin-right: 6px;
+  }
+  
+  .brand-name {
+    font-size: 1.1rem;
+  }
+  
+  .footer-desc {
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  
+  .newsletter h4 {
+    margin-bottom: 8px;
+  }
+  
+  .newsletter-form {
+    max-width: 220px;
+    margin-bottom: 10px;
+  }
+  
+  .newsletter-form input,
+  .newsletter-form button {
+    padding: 7px 8px;
+    font-size: 0.75rem;
+  }
+  
+  .social-icons {
+    gap: 8px;
+  }
+  
+  .social-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 6px;
+  }
+  
+  .footer-section ul li a {
+    font-size: 0.75rem;
+  }
+  
+  .contact-item {
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+  
+  .contact-item i {
+    width: 14px;
+    font-size: 0.75rem;
+  }
+  
+  .footer-bottom {
+    padding: 12px 0;
+    margin-top: 20px;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.75rem;
+    padding: 0 6px;
   }
 }

@@ -182,3 +182,90 @@
     margin: -80px auto 15px;
   }
 }
+@media (max-width: 480px) {
+  .menu-card {
+    height: 350px;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  
+  .menu-card-image {
+    width: 140px;
+    height: 140px;
+    margin: -70px auto 12px;
+  }
+  
+  .menu-card-content {
+    padding: 0 20px 20px;
+  }
+  
+  .menu-card-title {
+    font-size: 1.1rem;
+  }
+  
+  .menu-card-desc {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .menu-card {
+    height: 320px;
+    max-width: 240px;
+  }
+  
+  .menu-card-image {
+    width: 120px;
+    height: 120px;
+    margin: -60px auto 10px;
+  }
+  
+  .menu-card-content {
+    padding: 0 15px 15px;
+  }
+  
+  .menu-card-title {
+    font-size: 1rem;
+  }
+  
+  .menu-card-desc {
+    font-size: 0.75rem;
+  }
+  
+  .menu-add-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .menu-card {
+    height: 300px;
+    max-width: 200px;
+  }
+  
+  .menu-card-image {
+    width: 100px;
+    height: 100px;
+    margin: -50px auto 8px;
+  }
+  
+  .menu-card-content {
+    padding: 0 12px 12px;
+  }
+  
+  .menu-card-title {
+    font-size: 0.9rem;
+  }
+  
+  .menu-card-desc {
+    font-size: 0.7rem;
+  }
+  
+  .menu-add-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Menu.css';
 import { useCart } from './Navbar';
+import Footer from './Footer';
 
 export default function Menu() {
   const { addToCart } = useCart();
@@ -42,7 +43,7 @@ export default function Menu() {
     
   ];
 
-  return (
+  return ( <>
     <div>
       <section className="menu-section">
         <h2 className="menu-title">Our Menu</h2>
@@ -66,5 +67,7 @@ export default function Menu() {
         </div>
       </section>
     </div>
+    <Footer />
+    </>
   );
 }

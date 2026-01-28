@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import apiService from '../services/apiService.js';
+import { testAPI } from '../services/testAPI.js';
 
 export default function Reservations() {
   const [reservations, setReservations] = useState([]);
@@ -13,19 +13,24 @@ export default function Reservations() {
   const loadReservations = async () => {
     try {
       setLoading(true);
-      const data = await apiService.getReservations();
+      setError('');
+      const response = await fetch('http://localhost:8000/api/reservations');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log('Reservations from database:', data);
       setReservations(Array.isArray(data) ? data : []);
       setLoading(false);
     } catch (err) {
       console.error('Error:', err);
-      setError('Serveur Gusto non démarré - Vérifiez que le backend Laravel fonctionne');
+      setError('Backend gustobackend non disponible - Démarrez: php artisan serve');
       setLoading(false);
     }
   };
 
   const updateReservationStatus = async (reservationId, status) => {
     try {
-      console.log('Updating reservation:', reservationId, 'to status:', status);
       const response = await fetch(`http://localhost:8000/api/reservations/${reservationId}`, {
         method: 'PUT',
         headers: {
@@ -34,13 +39,8 @@ export default function Reservations() {
         body: JSON.stringify({ status })
       });
       
-      console.log('Response status:', response.status);
       if (response.ok) {
-        console.log('Status updated successfully');
-        loadReservations();
-      } else {
-        const errorData = await response.json();
-        console.error('Error updating reservation status:', errorData);
+        loadReservations(); // Reload from database
       }
     } catch (err) {
       console.error('Error updating status:', err);
@@ -123,10 +123,8 @@ export default function Reservations() {
                   <tr key={reservation.id}>
                     <td>#{reservation.id}</td>
                     <td>{reservation.name}</td>
-                    
                     <td>{reservation.phone}</td>
-                    <td>Table {reservation.table?.number || reservation.table_id}</td>
-                   
+                    <td>Table {reservation.table?.number || reservation.table?.id || 'N/A'}</td>
                     <td>{new Date(reservation.date).toLocaleDateString()}</td>
                     <td>{reservation.time}</td>
                     <td>

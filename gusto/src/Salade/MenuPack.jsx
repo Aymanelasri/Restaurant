@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import './MenuPack.css';
 import { useCart } from './Navbar';
 
 const categories = [
@@ -116,7 +117,7 @@ export default function MenuPack() {
 
   return (
     <div className="container py-5 reveal">
-      <h1 className="text-center fw-bold mb-4">
+      <h1 className="text-center  mb-4 mt-3">
         Our Regular Menu Pack
       </h1>
 
@@ -145,10 +146,8 @@ export default function MenuPack() {
                   <img
                     src={d.image}
                     alt={d.name}
-                    className="img-fluid rounded-circle mx-auto d-block"
+                    className="img-fluid rounded-circle mx-auto d-block menu-item-img"
                     style={{ 
-                      width: "150px", 
-                      height: "150px", 
                       objectFit: "cover",
                       border: "4px solid #fff",
                       boxShadow: "0 8px 25px rgba(0,0,0,0.15)"

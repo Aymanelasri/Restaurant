@@ -6,8 +6,10 @@ class ApiService {
   }
 
   getAuthHeaders() {
+    const token = localStorage.getItem('token');
     return {
-      ...API_CONFIG.HEADERS
+      ...API_CONFIG.HEADERS,
+      ...(token && { 'Authorization': `Bearer ${token}` })
     };
   }
 
@@ -109,7 +111,7 @@ class ApiService {
       date: reservationData.date,
       time: reservationData.time,
       table_id: reservationData.table_id,
-     
+      guests: reservationData.guests || 1
     });
   }
 
