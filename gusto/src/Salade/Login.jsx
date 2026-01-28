@@ -38,7 +38,7 @@ export default function Login() {
           navigate('/reservation');
         }
       } else {
-        setError(data.message || 'Login failed');
+        setError(data.message || 'Login faileed');
       }
     } catch (error) {
       setError('Password or email is incorrect');
@@ -100,7 +100,7 @@ export default function Login() {
           </form>
 
           <div className="auth-links">
-            <p>Don't have an account? <Link to="/register">Sign up here</Link></p>
+            <p>Don't have an account ? <Link to="/register">Sign up here</Link></p>
           </div>
         </div>
       </div>
