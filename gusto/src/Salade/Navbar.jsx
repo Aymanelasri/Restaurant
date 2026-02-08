@@ -88,7 +88,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button className="mobile-menu-btn" onClick={toggleMobileMenu} aria-label="Toggle menu">
-          <i class="fa-solid fa-bars"></i>
+          <i className="fa-solid fa-bars"></i>
           
         </button>
 

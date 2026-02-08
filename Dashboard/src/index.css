@@ -1,0 +1,41 @@
+:root {
+  --bs-body-color: #212529;
+  --bs-body-bg: #ffffff;
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-color: #dee2e6;
+  --bs-body-bg: #212529;
+}
+
+.transition-all {
+  transition: all 0.2s ease-in-out;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.show {
+    transform: translateX(0);
+  }
+}

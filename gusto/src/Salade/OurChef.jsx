@@ -1,25 +1,43 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./OurChef.css";
-
-const chefs = [
-	{ name: "Claire Dubois", img: "/chefs/Claire-Dubois.webp" },
-    { name: "Lucas Moreau", img: "/chefs/Lucas-Moreau.webp" },
-	{ name: "Marco Bianchi", img: "/chefs/Marco-Bianchi.webp" },
-	{ name: "Elena Martínez", img: "/chefs/Elena-Martínez.webp" },
-	{ name: "MJulien Lefèvre", img: "/chefs/Julien-Lefèvre.webp" },
-	{ name: "Sofia Romano", img: "/chefs/Sofia-romano.webp" },
-	{ name: "Thomas Schneider", img: "/chefs/Thomas-Schneider.webp" },
-	{ name: "Yassine Amrani", img: "/chefs/Yassine-Amrani.webp" }
-];
 
 export default function OurChef() {
 	const scroller = useRef(null);
+	const [chefs, setChefs] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		fetchChefs();
+	}, []);
+
+	const fetchChefs = async () => {
+		try {
+			const response = await fetch('http://localhost:8000/api/chefs');
+			const data = await response.json();
+			setChefs(data.map(chef => ({
+				name: chef.name,
+				img: `http://localhost:8000${chef.image}`
+			})));
+		} catch (error) {
+			console.error('Error fetching chefs:', error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	const scroll = (dir = 1) => {
 		if (!scroller.current) return;
 		const width = scroller.current.clientWidth || 300;
 		scroller.current.scrollBy({ left: dir * width, behavior: 'smooth' });
 	};
+
+	if (loading) {
+		return (
+			<section className="chef-section reveal">
+				<div style={{textAlign: 'center', padding: '50px'}}>Loading chefs...</div>
+			</section>
+		);
+	}
 
 	return (
 		<section className="chef-section reveal">

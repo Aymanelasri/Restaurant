@@ -36,17 +36,18 @@ export default function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        // Store token and user info
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        
-        // Redirect to reservation page
-        navigate('/reservation');
+        // Navigate to email verification
+        navigate('/email-verification', { state: { email: formData.email } });
       } else {
-        setError(data.message || 'Registration failed');
+        // Handle specific error messages
+        if (data.message && data.message.includes('email')) {
+          setError('This email is already registered. Please use a different email or try logging in.');
+        } else {
+          setError(data.message || 'Registration failed');
+        }
       }
     } catch (error) {
-      setError('Network error. Please try again.');
+      setError('Network error. Please try again');
     } finally {
       setLoading(false);
     }

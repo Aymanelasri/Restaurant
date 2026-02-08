@@ -41,15 +41,39 @@ export default function Reservation() {
   }, [formData.date, formData.time]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
     const userData = localStorage.getItem('user');
     
-    if (!token || !userData) {
+    console.log('Token:', token);
+    console.log('User Data:', userData);
+    
+    if (!token || !userData || userData === 'undefined') {
+      console.log('No token or user, redirecting to login');
       navigate('/login');
       return;
     }
     
-    setUser(JSON.parse(userData));
+    try {
+      const parsedUser = JSON.parse(userData);
+      console.log('Parsed User:', parsedUser);
+      console.log('User Role:', parsedUser.role);
+      
+      if (parsedUser.role === 'admin') {
+       
+        localStorage.clear();
+       
+        navigate('/login');
+        return;
+      }
+      
+      console.log('User authenticated, loading reservation page');
+      setUser(parsedUser);
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      navigate('/login');
+      return;
+    }
+    
     fetchTables();
   }, [navigate, fetchTables]);
 

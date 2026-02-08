@@ -1,47 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Menu.css';
 import { useCart } from './Navbar';
 import Footer from './Footer';
 
 export default function Menu() {
   const { addToCart } = useCart();
-  const dishes = [
-    // Popular Dishes
-    { title: 'Pasta', desc: 'Rich tomato sauce, parmesan and fresh basil', price: '35.00', img: '/restaurants/pasta.webp' },
-    { title: 'French Fries', desc: 'Crispy golden fries seasoned with sea salt', price: '55.00', img: '/restaurants/frites.webp' },
-    { title: 'Chicken Shawarma', desc: 'Spiced chicken wrapped with garlic sauce and veggies', price: '35.00', img: '/restaurants/shawarma.webp' },
-    { title: 'Fish Curry', desc: 'Creamy coconut curry with tender fish fillets', price: '35.00', img: '/restaurants/fish-curry.webp' },
-    { title: 'Nuggets', desc: 'Crispy chicken nuggets served with dip', price: '35.00', img: '/restaurants/nuggets.webp' },
-    { title: 'Pizza', desc: 'Stone-baked pizza with fresh toppings', price: '25.00', img: '/restaurants/pizza.webp' },
-    
-    // Italian
-    { title: 'Spaghetti', desc: 'Classic Italian pasta with rich sauce', price: '25.00', img: '/restaurants/Categories/spaghetti.webp' },
-    { title: 'Lasagna', desc: 'Layered pasta with meat and cheese', price: '30.00', img: '/restaurants/Categories/Lasagna.webp' },
-    
-    // Mexican
-    { title: 'Potatoes Mexico', desc: 'Spicy Mexican-style potatoes', price: '10.00', img: '/restaurants/Categories/potatoes-mexico.webp' },
-    { title: 'Mexican Tacos', desc: 'Authentic Mexican tacos with fresh ingredients', price: '25.00', img: '/restaurants/Categories/Mexican-Dishes.webp' },
-    { title: 'Recipe Mexican', desc: 'Traditional Mexican recipe with authentic flavors', price: '15.00', img: '/restaurants/Categories/Recipe-mexican.webp' },
-    { title: 'Empanadas', desc: 'Crispy pastries filled with savory ingredients', price: '15.00', img: '/restaurants/Categories/Hispanic-mexico.webp' },
-    
-    // Japanese
-    { title: 'Sushi Platter', desc: 'Fresh sushi selection with wasabi and ginger', price: '28.00', img: '/restaurants/Categories/sushi.webp' },
-    { title: 'Ramen Noodles', desc: 'Hot Japanese noodle soup with rich broth', price: '30.00', img: '/restaurants/Categories/Ramen-japon.webp' },
-    { title: 'Japanese Soup', desc: 'Traditional Japanese soup with fresh ingredients', price: '30.00', img: '/restaurants/Categories/soup japanesse.webp' },
-    
-    // Drinks
-    { title: 'Orange Juice', desc: 'Fresh squeezed orange juice', price: '5.00', img: '/restaurants/Orange-jus.webp' },
-    { title: 'Melon Juice', desc: 'Sweet and refreshing melon juice', price: '7.00', img: '/restaurants/Melon-jus.webp' },
-    { title: 'Strawberry Juice', desc: 'Fresh strawberry juice with natural sweetness', price: '8.00', img: '/restaurants/Strawberry-jus.webp' },
-    { title: 'Oreo Milkshake', desc: 'Creamy milkshake with Oreo cookies', price: '8.00', img: '/restaurants/oreo-milk.webp' },
-    
-    // Additional Items
-    { title: 'Croissants', desc: 'Buttery French pastries, perfect for breakfast', price: '6.00', img: '/restaurants/croissants.webp' },
-    { title: 'Grilled Chicken', desc: 'Tender grilled chicken with herbs and spices', price: '22.00', img: '/restaurants/chicken.webp' },
-    { title: 'Crepes', desc: 'Thin French pancakes with sweet or savory fillings', price: '12.00', img: '/restaurants/crepes.webp' },
+  const [dishes, setDishes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    // Check for token from Google OAuth
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    if (token) {
+      localStorage.setItem('auth_token', token);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
     
-  ];
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/products');
+      const data = await response.json();
+      setDishes(data.map(product => ({
+        title: product.name,
+        desc: product.description,
+        price: parseFloat(product.price).toFixed(2),
+        img: `http://localhost:8000${product.image}`
+      })));
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px'}}>
+        <div className="spinner-border text-danger" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return ( <>
     <div>

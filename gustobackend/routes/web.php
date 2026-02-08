@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return response()->json([
+        'message' => 'Welcome Home!',
+        'user' => auth()->user()
+    ]);
+});
+
 Route::get('/login', function () {
     return response()->json(['message' => 'Login page']);
 })->name('login');
+
+// Google OAuth Routes
+Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);

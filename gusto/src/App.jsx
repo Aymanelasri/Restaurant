@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 import ScrollReveal from './Salade/ScrollReveal';
 import Accueil from './Accueil';
@@ -9,6 +9,40 @@ import DetailsModule from './DetailsModule';
 import FormRecherche from './FormRecherche';
 import Ligne from './Ligne';
 import NotFound from './NotFound';
+import Login from './Salade/Login';
+import Reservation from './Salade/Reservation';
+import ForgotPassword from './Salade/ForgotPassword.jsx';
+import ResetPassword from './Salade/ResetPassword.jsx';
+
+function AuthHandler() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        console.log('AuthHandler - Current URL:', window.location.href);
+        const params = new URLSearchParams(location.search);
+        const token = params.get('token');
+        const user = params.get('user');
+        
+        console.log('AuthHandler - Token from URL:', token);
+        console.log('AuthHandler - User from URL:', user);
+        
+        if (token && user) {
+            console.log('AuthHandler - Saving to localStorage');
+            localStorage.setItem('token', token);
+            localStorage.setItem('auth_token', token);
+            localStorage.setItem('user', user);
+            
+            console.log('AuthHandler - Saved token:', localStorage.getItem('token'));
+            console.log('AuthHandler - Saved user:', localStorage.getItem('user'));
+            
+            console.log('AuthHandler - Redirecting to /reservation');
+            window.location.href = '/reservation';
+        }
+    }, [location, navigate]);
+    
+    return null;
+}
 
 export default function App() {
     const [modules, setModules] = useState([]);
@@ -35,11 +69,16 @@ export default function App() {
 
     return (
         <Router>
+            <AuthHandler />
             <NavBar />
             <ScrollReveal />
             <div className="container mt-4">
                 <Routes>
                     <Route path="/" element={<Accueil />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/reservation" element={<Reservation />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/filieres" element={<Filiere modules={modules} />} />
                     <Route path="/modules" element={
                         <>

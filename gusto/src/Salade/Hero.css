@@ -165,15 +165,18 @@ body::before {
 .hero-ctas { display:flex; gap:12px; align-items:center; }
 
 .btn-primary {
-  background: linear-gradient(180deg,#f6b24c,#ef9f3b);
+  background: linear-gradient(135deg, #dd2323 0%, #ff6600 100%);
   border: none;
-  color: #1b1b1b;
-  padding: 10px 20px;
+  color: #fff;
+  padding: 12px 28px;
   border-radius: 28px;
-  box-shadow: 0 6px 18px rgba(239,159,59,0.25);
+  box-shadow: 0 8px 24px rgba(238, 90, 111, 0.4);
   cursor: pointer;
   font-weight: 700;
+  transition: all 0.3s ease;
 }
+
+
 
 .btn-outline {
   background: transparent;

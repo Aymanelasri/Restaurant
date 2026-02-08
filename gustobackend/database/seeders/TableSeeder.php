@@ -11,9 +11,13 @@ class TableSeeder extends Seeder
     public function run()
     {
         // Ensure table is empty to avoid duplicate primary key errors
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (config('database.default') === 'mysql') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         DB::table('tables')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (config('database.default') === 'mysql') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
         $tables = [
             ['seats' => 2, 'status' => 'available', 'position' => ['top' => '20%', 'left' => '15%'], 'type' => 'regular', 'price' => 0],
