@@ -1,27 +1,27 @@
-# Restaurant Management System
+# Système de Gestion de Restaurant
 
-نظام إدارة مطعم متكامل يربط بين Laravel backend و React Dashboard frontend.
+Un système complet de gestion de restaurant reliant un backend Laravel et un frontend React Dashboard.
 
-## المكونات
+## Composants
 
-### 1. Laravel Backend (gustobackend)
-- **المسار**: `gustobackend/`
-- **التقنيات**: Laravel 10, MySQL, Laravel Sanctum
-- **الوظائف**: REST API, Authentication, Database Management
+### 1. Backend Laravel (gustobackend)
+- **Chemin**: `gustobackend/`
+- **Technologies**: Laravel 10, MySQL, Laravel Sanctum
+- **Fonctionnalités**: API REST, Authentification, Gestion de base de données
 
-### 2. React Dashboard (Dashboard)
-- **المسار**: `Dashboard/`
-- **التقنيات**: React, Bootstrap, Recharts
-- **الوظائف**: Admin Dashboard, Data Visualization, CRUD Operations
+### 2. Dashboard React (Dashboard)
+- **Chemin**: `Dashboard/`
+- **Technologies**: React, Bootstrap, Recharts
+- **Fonctionnalités**: Tableau de bord administrateur, Visualisation de données, Opérations CRUD
 
-### 3. React Frontend (gusto)
-- **المسار**: `gusto/`
-- **التقنيات**: React, React Router
-- **الوظائف**: Customer Interface, Menu, Reservations
+### 3. Frontend React (gusto)
+- **Chemin**: `gusto/`
+- **Technologies**: React, React Router
+- **Fonctionnalités**: Interface client, Menu, Réservations
 
-## التشغيل
+## Installation et Démarrage
 
-### Laravel Backend
+### Backend Laravel
 ```bash
 cd gustobackend
 composer install
@@ -32,75 +32,77 @@ php artisan db:seed
 php artisan serve
 ```
 
-### React Dashboard
+### Dashboard React
 ```bash
 cd Dashboard
 npm install
 npm start
 ```
 
-### React Frontend
+### Frontend React
 ```bash
 cd gusto
 npm install
 npm start
 ```
 
-## API Endpoints
+## Points de terminaison API
 
-### Authentication
-- `POST /api/login` - تسجيل دخول
-- `POST /api/register` - تسجيل جديد
-- `POST /api/logout` - تسجيل خروج
+### Authentification
+- `POST /api/login` - Connexion
+- `POST /api/register` - Inscription
+- `POST /api/logout` - Déconnexion
 
-### Users Management
-- `GET /api/users` - جلب جميع المستخدمين
-- `PUT /api/users/{id}` - تحديث مستخدم
-- `DELETE /api/users/{id}` - حذف مستخدم
+### Gestion des utilisateurs
+- `GET /api/users` - Récupérer tous les utilisateurs
+- `PUT /api/users/{id}` - Mettre à jour un utilisateur
+- `DELETE /api/users/{id}` - Supprimer un utilisateur
 
-### Orders Management
-- `GET /api/orders` - جلب جميع الطلبات
-- `POST /api/orders` - إنشاء طلب جديد
-- `PUT /api/orders/{id}` - تحديث حالة الطلب
+### Gestion des commandes
+- `GET /api/orders` - Récupérer toutes les commandes
+- `POST /api/orders` - Créer une nouvelle commande
+- `PUT /api/orders/{id}` - Mettre à jour le statut de la commande
 
-### Reservations Management
-- `GET /api/reservations` - جلب جميع الحجوزات
-- `POST /api/reservations` - إنشاء حجز جديد
-- `PUT /api/reservations/{id}` - تحديث حالة الحجز
+### Gestion des réservations
+- `GET /api/reservations` - Récupérer toutes les réservations
+- `POST /api/reservations` - Créer une nouvelle réservation
+- `PUT /api/reservations/{id}` - Mettre à jour le statut de la réservation
 
-### Analytics
-- `GET /api/analytics` - جلب إحصائيات Dashboard
+### Analytiques
+- `GET /api/analytics` - Récupérer les statistiques du tableau de bord
 
-## الميزات
+## Fonctionnalités
 
-### Dashboard Features
-- ✅ إحصائيات شاملة (المستخدمين، الطلبات، الإيرادات)
-- ✅ إدارة المستخدمين (عرض، تعديل، حذف)
-- ✅ إدارة الطلبات (تتبع الحالة، تحديث)
-- ✅ إدارة الحجوزات (تأكيد، إلغاء)
-- ✅ الرسوم البيانية والتحليلات
-- ✅ واجهة مستجيبة
-- ✅ نظام تسجيل دخول
+### Fonctionnalités du Dashboard
+- ✅ Statistiques complètes (utilisateurs, commandes, revenus)
+- ✅ Gestion des utilisateurs (affichage, modification, suppression)
+- ✅ Gestion des commandes (suivi du statut, mise à jour)
+- ✅ Gestion des réservations (confirmation, annulation)
+- ✅ Graphiques et analyses
+- ✅ Interface responsive
+- ✅ Système de connexion
 
-### API Features
-- ✅ Laravel Sanctum Authentication
-- ✅ CORS Support
-- ✅ RESTful API Design
-- ✅ Data Validation
-- ✅ Error Handling
+### Fonctionnalités de l'API
+- ✅ Authentification Laravel Sanctum
+- ✅ Support CORS
+- ✅ Conception API RESTful
+- ✅ Validation des données
+- ✅ Gestion des erreurs
 
-## قاعدة البيانات
+## Base de données
 
-### الجداول الرئيسية
-- `users` - المستخدمين
-- `orders` - الطلبات
-- `reservations` - الحجوزات
-- `reviews` - التقييمات
-- `tables` - الطاولات
+### Tables principales
+- `users` - Utilisateurs
+- `orders` - Commandes
+- `reservations` - Réservations
+- `reviews` - Avis
+- `tables` - Tables
+- `products` - Produits
+- `chefs` - Chefs
 
-## التكوين
+## Configuration
 
-### Laravel Environment
+### Environnement Laravel
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -110,24 +112,24 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### React Environment
+### Environnement React
 ```env
 REACT_APP_API_URL=http://localhost:8000/api
 ```
 
-## الاستخدام
+## Utilisation
 
-1. تشغيل Laravel backend على `http://localhost:8000`
-2. تشغيل React Dashboard على `http://localhost:3000`
-3. تسجيل الدخول باستخدام بيانات admin
-4. إدارة البيانات من خلال Dashboard
+1. Démarrer le backend Laravel sur `http://localhost:8000`
+2. Démarrer le Dashboard React sur `http://localhost:3000`
+3. Se connecter avec les identifiants admin
+4. Gérer les données via le Dashboard
 
-## المطورين
+## Technologies utilisées
 
-- Laravel Backend: PHP, MySQL, Sanctum
-- React Frontend: JavaScript, Bootstrap, Recharts
-- API Integration: Fetch API, Axios
+- **Backend**: PHP, Laravel 10, MySQL, Sanctum
+- **Frontend**: React, JavaScript, Bootstrap, Recharts
+- **Intégration API**: Fetch API, Axios
 
-## الدعم
+## Support
 
-للمساعدة أو الاستفسارات، يرجى مراجعة الكود أو إنشاء issue جديد.
+Pour toute aide ou question, veuillez consulter le code ou créer une nouvelle issue.
