@@ -1,12 +1,49 @@
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 #f5f1eb;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+  overflow-y: auto;
 }
 
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  overflow-y: auto;
   width: 100%;
+  overscroll-behavior-y: smooth;
+}
+
+#root {
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+section, [id] {
+  scroll-margin-top: 90px;
+}
+
+img, svg, video {
+  max-width: 100%;
+  display: block;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f1eb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d4af37, #b11217);
+  border-radius: 999px;
 }
 
 .App {

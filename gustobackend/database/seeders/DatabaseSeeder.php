@@ -21,7 +21,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Users - Admin only
-        User::create(['name' => 'Admin', 'email' => 'admin@restaurant.com', 'password' => Hash::make('password'), 'role' => 'admin']);
+        User::updateOrCreate(
+            ['email' => 'aymanelasri100@gmail.com'],
+            ['name' => 'Aymane Elasri', 'password' => Hash::make('Asad@1234'), 'role' => 'admin']
+        );
+        User::updateOrCreate(
+            ['email' => 'admin@restaurant.com'],
+            ['name' => 'Admin', 'password' => Hash::make('password'), 'role' => 'admin']
+        );
 
         // Chefs
         Chef::create(['name' => 'Marco Bianchi', 'specialty' => 'Italian Cuisine', 'experience_years' => 12, 'rating' => 4.9, 'status' => 'active', 'orders_today' => 0, 'image' => '/chefs/Marco-Bianchi.webp']);
@@ -47,7 +54,7 @@ class DatabaseSeeder extends Seeder
 
         // Tables
         $this->call(TableSeeder::class);
-        
+
         // Products (Menu)
         $this->call(ProductSeeder::class);
     }

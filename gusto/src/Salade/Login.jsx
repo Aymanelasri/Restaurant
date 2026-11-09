@@ -45,7 +45,7 @@ export default function Login() {
         if (data.user && data.user.role === 'admin') {
           console.log('Redirecting to Dashboard...');
           const userData = encodeURIComponent(JSON.stringify(data.user));
-          const redirectUrl = `http://localhost:3001/?user=${userData}&token=${data.token}`;
+          const redirectUrl = `/dashboard?user=${userData}&token=${data.token}`;
           console.log('Redirect URL:', redirectUrl);
           window.location.href = redirectUrl;
         } else {
@@ -111,13 +111,13 @@ export default function Login() {
 
           {error && (
             <div className="error-message">
-              <p>❌ {error}</p>
+              <p><i className="fa-solid fa-circle-exclamation"></i> {error}</p>
             </div>
           )}
 
           {verificationStep ? (
             <>
-              <p className="verification-message">✉️ Check your email for verification code</p>
+              <p className="verification-message"><i className="fa-solid fa-envelope"></i> Check your email for verification code</p>
               <form onSubmit={handleVerification}>
                 <div className="form-group">
                   <label>Verification Code</label>

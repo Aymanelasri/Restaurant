@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'category' => 'required|string|max:255',
@@ -24,15 +25,16 @@ class ProductController extends Controller
             'available' => 'boolean'
         ]);
 
-        $product = Product::create($request->all());
+        // FIX: validated() machi all()
+        $product = Product::create($validated);
         return response()->json($product, 201);
     }
 
     public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-        
-        $request->validate([
+
+        $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'price' => 'sometimes|numeric|min:0',
             'category' => 'sometimes|string|max:255',
@@ -41,7 +43,7 @@ class ProductController extends Controller
             'available' => 'sometimes|boolean'
         ]);
 
-        $product->update($request->all());
+        $product->update($validated);
         return response()->json($product);
     }
 
@@ -60,9 +62,9 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $fileName = 'product_' . time() . '.' . $image->getClientOriginalExtension();
+            $fileName = 'product_' . Str::uuid() . '.' . $image->extension();
             $image->move(public_path('restaurants'), $fileName);
-            
+
             return response()->json([
                 'path' => '/restaurants/' . $fileName
             ]);

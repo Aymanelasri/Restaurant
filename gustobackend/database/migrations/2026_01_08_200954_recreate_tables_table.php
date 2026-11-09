@@ -2,15 +2,19 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
+        if (Schema::hasTable('reservations')) {
+            Schema::dropIfExists('reservations');
+        }
+
         Schema::dropIfExists('tables');
-        
+
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->integer('seats');
@@ -20,12 +24,23 @@ return new class extends Migration
             $table->json('position');
             $table->timestamps();
         });
-        
-        Schema::enableForeignKeyConstraints();
+
+        Schema::create('reservations', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('phone');
+            $table->date('date');
+            $table->time('time');
+            $table->foreignId('table_id')->constrained()->onDelete('cascade');
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
+            $table->decimal('total_price', 8, 2)->default(0);
+            $table->timestamps();
+        });
     }
 
     public function down(): void
     {
+        Schema::dropIfExists('reservations');
         Schema::dropIfExists('tables');
     }
 };

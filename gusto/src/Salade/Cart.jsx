@@ -29,7 +29,7 @@ export default function Cart() {
         <div className="cart-container">
           <h2 className="cart-title">Your Cart</h2>
           <div className="empty-cart">
-            <div className="empty-cart-icon">🛒</div>
+            <div className="empty-cart-icon"><i className="fa-solid fa-cart-shopping"></i></div>
             <h3>Your cart is empty</h3>
             <p>Add some delicious items from our menu!</p>
             <Link to="/menu" className="continue-shopping">Continue Shopping</Link>
@@ -55,16 +55,16 @@ export default function Cart() {
                 <p>{item.desc}</p>
                 <div className="cart-item-footer">
                   <div className="quantity-controls">
-                    <button className="quantity-btn" onClick={() => decreaseQuantity(item.title)}>-</button>
+                    <button className="quantity-btn" onClick={() => decreaseQuantity(item.title)} aria-label="Decrease"><i className="fa-solid fa-minus"></i></button>
                     <span className="quantity">Quantity: {item.quantity}</span>
-                    <button className="quantity-btn" onClick={() => addToCart(item)}>+</button>
+                    <button className="quantity-btn" onClick={() => addToCart(item)} aria-label="Increase"><i className="fa-solid fa-plus"></i></button>
                   </div>
                   <div className="price">${(parseFloat(item.price) * item.quantity).toFixed(2)}</div>
                   <button 
                     className="remove-btn" 
                     onClick={() => removeFromCart(item.title)}
                   >
-                    X
+                    <i className="fa-solid fa-xmark"></i>
                   </button>
                 </div>
               </div>

@@ -24,7 +24,7 @@ export default function ForgotPassword() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage('✅ Password reset link sent to your email!');
+        setMessage('Password reset link sent to your email!');
         setEmail('');
       } else {
         setError(data.message || 'Failed to send reset link');
@@ -50,8 +50,8 @@ export default function ForgotPassword() {
           <h2>Reset Your Password</h2>
           <p>Enter your email address to receive a password reset link</p>
 
-          {message && <div className="success-message"><p>{message}</p></div>}
-          {error && <div className="error-message"><p>❌ {error}</p></div>}
+          {message && <div className="success-message"><p><i className="fa-solid fa-circle-check"></i> {message}</p></div>}
+          {error && <div className="error-message"><p><i className="fa-solid fa-circle-exclamation"></i> {error}</p></div>}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">

@@ -8,8 +8,8 @@ export default function AboutSection() {
         <div className="about-left">
           <div className="chef-wrap">
             <img src="/chef.webp" alt="Chef" className="chef-img" />
-            <div className="badge badge-top">🥗</div>
-            <div className="badge badge-bottom">🍰</div>
+            <div className="badge badge-top"><i className="fa-solid fa-leaf"></i></div>
+            <div className="badge badge-bottom"><i className="fa-solid fa-cake-candles"></i></div>
           </div>
         </div>
 
@@ -18,12 +18,12 @@ export default function AboutSection() {
           <p className="lead">This is a type of restaurant which typically serves food and drinks, in addition to light refreshments such as baked goods or snacks. The term comes from the french word meaning food.</p>
 
           <ul className="features">
-            <li><span className="f-icon">🛒</span><span>Online Order</span></li>
-            <li><span className="f-icon">📅</span><span>Pre-Reservation</span></li>
-            <li><span className="f-icon">⏱️</span><span>24/7 Service</span></li>
-            <li><span className="f-icon">🏆</span><span>Organized Foodie Place</span></li>
-            <li><span className="f-icon">🧽</span><span>Clean Kitchen</span></li>
-            <li><span className="f-icon">👨‍🍳</span><span>Super Chefs</span></li>
+            <li><span className="f-icon"><i className="fa-solid fa-cart-shopping"></i></span><span>Online Order</span></li>
+            <li><span className="f-icon"><i className="fa-solid fa-calendar-check"></i></span><span>Pre-Reservation</span></li>
+            <li><span className="f-icon"><i className="fa-solid fa-clock"></i></span><span>24/7 Service</span></li>
+            <li><span className="f-icon"><i className="fa-solid fa-trophy"></i></span><span>Organized Foodie Place</span></li>
+            <li><span className="f-icon"><i className="fa-solid fa-broom"></i></span><span>Clean Kitchen</span></li>
+            <li><span className="f-icon"><i className="fa-solid fa-fire-burner"></i></span><span>Super Chefs</span></li>
           </ul>
 
           

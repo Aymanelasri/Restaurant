@@ -1,8 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './PopularDishes.css';
 import { useCart } from './Navbar';
-
-
 
 const DISHES = [
   { title: 'Pasta', img: '/restaurants/pasta.webp', price: '35.00', desc: 'Rich tomato sauce, parmesan and fresh basil.' },
@@ -15,8 +13,9 @@ const DISHES = [
 ];
 
 export default function PopularDishes() {
-   const { addToCart } = useCart();
+  const { addToCart } = useCart();
   const scroller = useRef(null);
+  const [addedItem, setAddedItem] = useState(null);
 
   const scroll = (dir = 1) => {
     if (!scroller.current) return;
@@ -24,8 +23,19 @@ export default function PopularDishes() {
     scroller.current.scrollBy({ left: dir * width, behavior: 'smooth' });
   };
 
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setAddedItem(item.title);
+    window.clearTimeout(handleAddToCart.timeoutId);
+    handleAddToCart.timeoutId = window.setTimeout(() => setAddedItem(null), 1000);
+  };
+
   return (
     <section className="popular-section reveal">
+      <div className={`popular-cart-feedback ${addedItem ? 'show' : ''}`} aria-live="polite">
+        {addedItem ? `${addedItem} added to cart` : 'Cart ready'}
+      </div>
+
       <div className="popular-header">
         <h3>Popular Dishes</h3>
         <div className="popular-controls">
@@ -51,7 +61,13 @@ export default function PopularDishes() {
               <p className="desc">{d.desc}</p>
               <div className="dish-foot">
                 <div className="price">${d.price}</div>
-                <button onClick={() => addToCart(d)} className="add"><i className="bi bi-cart"></i></button>
+                <button
+                  onClick={() => handleAddToCart(d)}
+                  className={`add ${addedItem === d.title ? 'added' : ''}`}
+                  aria-label={`Add ${d.title} to cart`}
+                >
+                  <i className={`bi ${addedItem === d.title ? 'bi-check-lg' : 'bi-cart'}`}></i>
+                </button>
               </div>
             </div>
           </article>

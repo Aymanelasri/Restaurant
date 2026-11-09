@@ -111,25 +111,34 @@ const items = [
 
 export default function MenuPack() {
   const [selectedCategory, setSelectedCategory] = useState("Italian");
+  const [addedItem, setAddedItem] = useState(null);
   const { addToCart } = useCart();
 
   const filteredItems = items.filter(item => item.category === selectedCategory);
 
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setAddedItem(item.name);
+    window.clearTimeout(handleAddToCart.timeoutId);
+    handleAddToCart.timeoutId = window.setTimeout(() => setAddedItem(null), 1000);
+  };
+
   return (
-    <div className="container py-5 reveal">
+    <div id="menu-pack" className="container py-5 reveal">
+      <div className={`menu-cart-feedback ${addedItem ? 'show' : ''}`} aria-live="polite">
+        {addedItem ? `${addedItem} added to cart` : 'Cart ready'}
+      </div>
+
       <h1 className="text-center  mb-4 mt-3">
         Our Regular Menu Pack
       </h1>
 
-      <div className="d-flex flex-wrap justify-content-center gap-2 mb-5">
+      <div className="menu-category-tabs" aria-label="Menu categories">
         {categories.map((cat) => (
           <button
             key={cat}
-            className={`btn rounded-pill px-4 py-2 shadow-sm ${
-              selectedCategory === cat 
-                ? "btn-light" 
-                : "btn-outline-light"
-            }`}
+            type="button"
+            className={`menu-category-tab ${selectedCategory === cat ? "active" : ""}`}
             onClick={() => setSelectedCategory(cat)}
           >
             {cat}
@@ -137,10 +146,10 @@ export default function MenuPack() {
         ))}
       </div>
 
-      <div className="row g-4">
+      <div className="menu-items-row row g-4">
         {filteredItems.map((d, index) => (
-          <div className="col-12 col-sm-6 col-lg-3" key={index}>
-            <div className="card h-100 shadow-sm border-0 rounded-4 text-center">
+          <div className="menu-card-item col-12 col-sm-6 col-lg-3" key={index}>
+            <div className="card h-100 shadow-sm border-0 rounded-4 text-center menu-item-card">
               <div className="card-body d-flex flex-column">
                 <div className="position-relative mb-3">
                   <img
@@ -156,12 +165,18 @@ export default function MenuPack() {
                 </div>
                 <h5 className="fw-semibold">{d.name}</h5>
                 <p className="text-muted small">
-                  Delicious {d.category.toLowerCase()} cuisine
+                  Delicious {d.category} cuisine
                 </p>
                 <div className="text-warning mb-3">★★★★★</div>
                 <div className="mt-auto d-flex justify-content-between align-items-center">
                   <span className="fw-bold">{d.price}</span>
-                  <button onClick={() => addToCart(d)} className="menu-add-btn"><i className="bi bi-cart"></i></button>
+                  <button
+                    onClick={() => handleAddToCart(d)}
+                    className={`menu-add-btn ${addedItem === d.name ? 'added' : ''}`}
+                    aria-label={`Add ${d.name} to cart`}
+                  >
+                    <i className={`bi ${addedItem === d.name ? 'bi-check-lg' : 'bi-cart'}`}></i>
+                  </button>
                 </div>
               </div>
             </div>

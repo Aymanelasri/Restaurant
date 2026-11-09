@@ -65,7 +65,7 @@ export default function EmailVerification() {
           <h2>Enter Verification Code</h2>
           <p>Check your email and enter the 6-digit code</p>
 
-          {error && <div className="error-message"><p>❌ {error}</p></div>}
+          {error && <div className="error-message"><p><i className="fa-solid fa-circle-exclamation"></i> {error}</p></div>}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">

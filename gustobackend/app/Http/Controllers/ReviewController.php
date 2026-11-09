@@ -15,10 +15,17 @@ class ReviewController extends Controller
 
     public function store(Request $request)
     {
+        // FIX: kan bla validation (rating 999, comment HTML/script...)
+        $validated = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|max:1000',
+            'user_name' => 'required|string|max:100',
+        ]);
+
         $review = Review::create([
-            'rating' => $request->rating,
-            'comment' => $request->comment,
-            'user_name' => $request->user_name,
+            'rating' => $validated['rating'],
+            'comment' => strip_tags($validated['comment']),
+            'user_name' => strip_tags($validated['user_name']),
             'status' => 'pending'
         ]);
 
@@ -28,7 +35,13 @@ class ReviewController extends Controller
     public function update(Request $request, $id)
     {
         $review = Review::findOrFail($id);
-        $review->update(['status' => $request->status]);
+
+        // FIX: status khass ykoun mn liste (bddl l-valeurs ila kano mkhtalfin 3endek)
+        $validated = $request->validate([
+            'status' => 'required|string|in:pending,approved,rejected'
+        ]);
+
+        $review->update(['status' => $validated['status']]);
         return response()->json($review);
     }
 }

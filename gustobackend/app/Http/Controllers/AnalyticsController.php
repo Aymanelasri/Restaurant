@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Reservation;
 use App\Models\Review;
-use Illuminate\Http\Request;
 
 class AnalyticsController extends Controller
 {
@@ -16,20 +15,21 @@ class AnalyticsController extends Controller
         $totalOrders = Order::count();
         $totalReservations = Reservation::count();
         $totalReviews = Review::count();
-        
-        $totalRevenue = Order::sum('total_amount');
+
+        // FIX: les commandes annulées ma-khasshomch dkhlo f revenue (b7al DashboardController)
+        $totalRevenue = Order::where('status', '!=', 'cancelled')->sum('total_amount');
         $pendingOrders = Order::where('status', 'pending')->count();
         $confirmedReservations = Reservation::where('status', 'confirmed')->count();
-        
-        // Recent orders
-        $recentOrders = Order::with('user')
+
+        // FIX: ma-nrj3ouch kol les colonnes dyal user
+        $recentOrders = Order::with('user:id,name,email')
             ->orderBy('created_at', 'desc')
             ->limit(10)
             ->get();
-            
-        // Monthly revenue data
+
         $monthlyRevenue = Order::selectRaw('MONTH(created_at) as month, SUM(total_amount) as revenue')
             ->whereYear('created_at', date('Y'))
+            ->where('status', '!=', 'cancelled')
             ->groupBy('month')
             ->orderBy('month')
             ->get();

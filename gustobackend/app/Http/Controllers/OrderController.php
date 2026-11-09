@@ -7,10 +7,15 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    protected function isStaff($user): bool
+    {
+        return $user && in_array($user->role, ['admin', 'staff']);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'items' => 'required|array',
+            'items' => 'required|array|min:1',
             'customer_name' => 'required|string',
             'customer_phone' => 'required|string',
             'delivery_address' => 'required|string',
@@ -19,6 +24,8 @@ class OrderController extends Controller
             'total_amount' => 'required|numeric|min:0'
         ]);
 
+        // TODO: total_amount kaybqa mn client -> khassek t7sbo mn prix dyal Product
+        // (ssift lia chkel 'items' bach nzid hadchi)
         $order = Order::create([
             'user_id' => $request->user()->id,
             'items' => $request->items,
@@ -37,14 +44,16 @@ class OrderController extends Controller
         ], 201);
     }
 
-    public function index(Request $request = null)
+    public function index(Request $request)
     {
-        // If no user (public access), return all orders for dashboard
-        if (!$request || !$request->user()) {
+        $user = $request->user();
+
+        // FIX: kan public kay-rj3 kol l-orders (smiyat, telephones, adresses).
+        // daba: admin/staff kay-chouf kolchi, customer ghir dyalo.
+        if ($this->isStaff($user)) {
             $orders = Order::orderBy('created_at', 'desc')->get();
         } else {
-            // If authenticated user, return only their orders
-            $orders = Order::where('user_id', $request->user()->id)
+            $orders = Order::where('user_id', $user->id)
                           ->orderBy('created_at', 'desc')
                           ->get();
         }
@@ -58,9 +67,18 @@ class OrderController extends Controller
             'status' => 'required|string|in:pending,preparing,delivered,cancelled,confirmed'
         ]);
 
-        $order = Order::where('id', $id)
-                      ->where('user_id', $request->user()->id)
-                      ->firstOrFail();
+        $user = $request->user();
+
+        if ($this->isStaff($user)) {
+            // FIX: admin/staff i9dro ybddlo status dyal ay order (dashboard)
+            $order = Order::findOrFail($id);
+        } else {
+            // FIX: customer i9dr ghir yلغي order dyalo (kan i9dr ydir 'delivered' l rasso)
+            if ($request->input('status') !== 'cancelled') {
+                return response()->json(['message' => 'Forbidden'], 403);
+            }
+            $order = Order::where('id', $id)->where('user_id', $user->id)->firstOrFail();
+        }
 
         $order->status = $request->input('status');
         $order->save();

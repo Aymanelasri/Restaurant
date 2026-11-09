@@ -12,7 +12,7 @@ class EmailVerificationController extends Controller
     public function sendVerificationEmail(Request $request)
     {
         $user = $request->user();
-        
+
         if ($user->hasVerifiedEmail()) {
             return response()->json(['message' => 'Email already verified'], 200);
         }
@@ -23,7 +23,7 @@ class EmailVerificationController extends Controller
             ['id' => $user->id, 'hash' => sha1($user->email)]
         );
 
-        Mail::raw("Click here to verify your email: $verificationUrl", function($message) use ($user) {
+        Mail::raw("Click here to verify your email: $verificationUrl", function ($message) use ($user) {
             $message->to($user->email)
                     ->subject('Verify Your Email Address');
         });
@@ -33,18 +33,26 @@ class EmailVerificationController extends Controller
 
     public function verify(Request $request, $id, $hash)
     {
+        // FIX: t'akked mn signature (ila route ma-3ndhach middleware 'signed')
+        if (!$request->hasValidSignature()) {
+            return response()->json(['message' => 'Invalid or expired link'], 403);
+        }
+
         $user = User::findOrFail($id);
 
         if (!hash_equals((string) $hash, sha1($user->email))) {
             return response()->json(['message' => 'Invalid verification link'], 403);
         }
 
+        // FIX: frontend URL mn config machi hardcoded localhost
+        $frontend = config('app.frontend_url');
+
         if ($user->hasVerifiedEmail()) {
-            return redirect('http://localhost:3000/login?verified=already');
+            return redirect($frontend . '/login?verified=already');
         }
 
         $user->markEmailAsVerified();
 
-        return redirect('http://localhost:3000/login?verified=success');
+        return redirect($frontend . '/login?verified=success');
     }
 }

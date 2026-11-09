@@ -9,12 +9,22 @@ import OurChef from './OurChef';
 import Footer from "./Footer";
 
 
+// Hero pictures live in public/ and must match the actual filenames on disk
 const IMAGES = {
-  Dishes: "/dish.webp",
-  Dessert: "/desserts.webp",
+  Dishes: "/dishes.webp",
+  Dessert: "/dessert.webp",
   Drinks: "/drinks.webp",
   Platter: "/platter.webp",
-  Snacks: "/snacks.webp",
+  Snacks: "/Snacks.webp",
+};
+
+// Font Awesome icons for the category pills
+const ICONS = {
+  Dishes: "fa-utensils",
+  Dessert: "fa-cake-candles",
+  Drinks: "fa-martini-glass-citrus",
+  Platter: "fa-drumstick-bite",
+  Snacks: "fa-cookie-bite",
 };
 
 function Hero() {
@@ -65,8 +75,15 @@ function Hero() {
             <p className="hero-sub reveal-child">Discover a place where passion meets taste, serving meals and drinks made to delight your senses</p>
 
             <div className="hero-ctas">
-              <button className="btn-primary reveal-child">Explore Food</button>
-              
+              <button
+                type="button"
+                className="btn-primary reveal-child"
+                onClick={() => {
+                  document.getElementById('menu-pack')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+              >
+                Explore Food
+              </button>
             </div>
           </div>
 
@@ -95,7 +112,7 @@ function Hero() {
                     onClick={() => handleSelect(key)}
                   >
                     <span className="dot" aria-hidden>
-                      {key === "Dishes" ? "🍽️" : key === "Dessert" ? "🍰" : key === "Drinks" ? "🥤" : key === "Platter" ? "🧺" : "🍿"}
+                      <i className={`fa-solid ${ICONS[key]}`}></i>
                     </span>
                     <span className="cat-label">{key}</span>
                   </button>

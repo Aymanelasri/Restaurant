@@ -2,6 +2,14 @@ import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
+function clearStaleAuthOnFreshSession() {
+  const hasStarted = sessionStorage.getItem('gusto_session_started');
+  if (hasStarted) return;
+
+  sessionStorage.setItem('gusto_session_started', '1');
+  ['token', 'auth_token', 'user', 'gustoUser'].forEach((key) => localStorage.removeItem(key));
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,8 +26,10 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('gustoUser');
   };
 
-  // تحقق من وجود مستخدم محفوظ عند تحميل الصفحة
+  // Clear stale auth that was saved in a previous browser session before hydrating the app.
   React.useEffect(() => {
+    clearStaleAuthOnFreshSession();
+
     const savedUser = localStorage.getItem('gustoUser');
     if (savedUser) {
       const userData = JSON.parse(savedUser);

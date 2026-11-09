@@ -14,33 +14,49 @@ import Reservation from './Salade/Reservation';
 import ForgotPassword from './Salade/ForgotPassword.jsx';
 import ResetPassword from './Salade/ResetPassword.jsx';
 
+import { lazy, Suspense } from 'react';
+const DashboardApp = lazy(() => import('./Dashboard/DashboardApp'));
+
+
+
+
 function AuthHandler() {
     const location = useLocation();
     const navigate = useNavigate();
-    
+
     useEffect(() => {
-        console.log('AuthHandler - Current URL:', window.location.href);
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
-        const user = params.get('user');
-        
-        console.log('AuthHandler - Token from URL:', token);
-        console.log('AuthHandler - User from URL:', user);
-        
-        if (token && user) {
-            console.log('AuthHandler - Saving to localStorage');
+        const userParam = params.get('user');
+
+        if (!token || !userParam) {
+            return;
+        }
+
+        try {
+            const user = JSON.parse(decodeURIComponent(userParam));
             localStorage.setItem('token', token);
             localStorage.setItem('auth_token', token);
-            localStorage.setItem('user', user);
-            
-            console.log('AuthHandler - Saved token:', localStorage.getItem('token'));
-            console.log('AuthHandler - Saved user:', localStorage.getItem('user'));
-            
-            console.log('AuthHandler - Redirecting to /reservation');
-            window.location.href = '/reservation';
+            localStorage.setItem('user', JSON.stringify(user));
+
+            const targetPath = user.role === 'admin' ? '/dashboard' : '/reservation';
+
+            if (location.pathname !== targetPath) {
+                window.location.href = targetPath;
+                return;
+            }
+
+            window.history.replaceState({}, document.title, targetPath);
+        } catch (error) {
+            localStorage.setItem('token', token);
+            localStorage.setItem('auth_token', token);
+            localStorage.setItem('user', userParam);
+            if (location.pathname !== '/reservation') {
+                window.location.href = '/reservation';
+            }
         }
     }, [location, navigate]);
-    
+
     return null;
 }
 
@@ -76,6 +92,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Accueil />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/dashboard/*" element={<Suspense fallback={null}><DashboardApp /></Suspense>} />
                     <Route path="/reservation" element={<Reservation />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/reset-password" element={<ResetPassword />} />

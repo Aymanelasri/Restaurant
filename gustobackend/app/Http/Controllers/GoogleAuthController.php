@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Exception;
 
 class GoogleAuthController extends Controller
@@ -19,25 +20,27 @@ class GoogleAuthController extends Controller
     // 2. L-blassa fin kiy-rj3 l-user
     public function handleGoogleCallback()
     {
+        $frontend = config('app.frontend_url');
+
         try {
-            // Jib l-user mn Google
             $googleUser = Socialite::driver('google')->stateless()->user();
 
-            // T'akked wach l-email ja mzyan
             if (!$googleUser->email) {
-                return "Error: Ma jach l-email mn Google!";
+                return redirect($frontend . '/login?error=no_email');
             }
 
-            // Sajjel l-user f Database (awla jibou ila deja m-sajjel)
-            $user = User::where('email', $googleUser->email)->first();
+            $normalizedEmail = strtolower($googleUser->email);
+            $user = User::where('email', $normalizedEmail)->first();
 
             if (!$user) {
                 $user = User::create([
-                    'email' => $googleUser->email,
+                    'email' => $normalizedEmail,
                     'name' => $googleUser->name,
                     'google_id' => $googleUser->id,
-                    'password' => bcrypt('Aymane@1234'),
-                    'role' => $googleUser->email === 'aymanelasri100@gmail.com' ? 'admin' : 'customer'
+                    // FIX: password random (kan hardcoded 'Asad@1234' -> ay wa7d ydkhl)
+                    'password' => Hash::make(Str::random(40)),
+                    // FIX: admin email mn config/.env
+                    'role' => $normalizedEmail === strtolower((string) config('app.admin_email')) ? 'admin' : 'customer'
                 ]);
             } else {
                 $user->update([
@@ -46,22 +49,17 @@ class GoogleAuthController extends Controller
                 ]);
             }
 
-            // Dir Login
-            Auth::login($user);
-
-            // Créer token
             $token = $user->createToken('auth_token')->plainTextToken;
 
-            // Sifto l-Dashboard ila admin, wla l-reservation ila customer
-            if ($user->role === 'admin') {
-                return redirect('http://localhost:3001/?user=' . urlencode(json_encode($user)) . '&token=' . $token);
-            } else {
-                return redirect('http://localhost:3000/?token=' . $token . '&user=' . urlencode(json_encode($user)));
-            }
+            // Nfs format l-9dim (user JSON + token) walakin b champs safe bark
+            $safeUser = $user->only(['id', 'name', 'email', 'role']);
+
+            return redirect($frontend . '/dashboard?user=' . urlencode(json_encode($safeUser)) . '&token=' . $token);
 
         } catch (Exception $e) {
-
-            dd($e);
+            // FIX: dd($e) kay-kchef kol chi f production
+            Log::error('Google auth failed: ' . $e->getMessage());
+            return redirect($frontend . '/login?error=google_failed');
         }
     }
 }

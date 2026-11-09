@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chef;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ChefController extends Controller
 {
@@ -15,7 +16,7 @@ class ChefController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'specialty' => 'required|string|max:255',
             'experience_years' => 'required|integer|min:0',
@@ -25,15 +26,16 @@ class ChefController extends Controller
             'image' => 'nullable|string'
         ]);
 
-        $chef = Chef::create($request->all());
+        // FIX: validated() machi all() (mass assignment)
+        $chef = Chef::create($validated);
         return response()->json($chef, 201);
     }
 
     public function update(Request $request, $id)
     {
         $chef = Chef::findOrFail($id);
-        
-        $request->validate([
+
+        $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'specialty' => 'sometimes|string|max:255',
             'experience_years' => 'sometimes|integer|min:0',
@@ -43,7 +45,7 @@ class ChefController extends Controller
             'image' => 'sometimes|nullable|string'
         ]);
 
-        $chef->update($request->all());
+        $chef->update($validated);
         return response()->json($chef);
     }
 
@@ -62,9 +64,10 @@ class ChefController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $fileName = 'chef_' . time() . '.' . $image->getClientOriginalExtension();
+            // FIX: uuid (time() kay3awd nfs smia) o extension mn mime machi mn client
+            $fileName = 'chef_' . Str::uuid() . '.' . $image->extension();
             $image->move(public_path('restaurants'), $fileName);
-            
+
             return response()->json([
                 'path' => '/restaurants/' . $fileName
             ]);
