@@ -3,7 +3,7 @@ import { Bars3Icon, BellIcon } from '@heroicons/react/24/outline';
 
 // The theme is dark-only now, so toggleDarkMode / darkMode props are accepted but unused.
 function Navbar({ setSidebarOpen }) {
-  const getStoredToken = () => localStorage.getItem('auth_token') || localStorage.getItem('token') || '';
+  const getStoredToken = useCallback(() => localStorage.getItem('auth_token') || localStorage.getItem('token') || '', []);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || '{}'));
   const userName = user.name || 'Admin User';
   const userInitial = userName.charAt(0).toUpperCase();

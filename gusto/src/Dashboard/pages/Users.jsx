@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { MagnifyingGlassIcon, PencilIcon, TrashIcon, PlusIcon, EyeIcon } from '@heroicons/react/24/outline';
 
 function Users() {
-  const getStoredToken = () => localStorage.getItem('auth_token') || localStorage.getItem('token') || '';
+  const getStoredToken = useCallback(() => localStorage.getItem('auth_token') || localStorage.getItem('token') || '', []);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
