@@ -44,7 +44,7 @@ function Navbar({ setSidebarOpen }) {
     } catch (error) {
       console.error('Failed to fetch notifications', error);
     }
-  }, []);
+  }, [getStoredToken]);
 
   useEffect(() => {
     const checkUser = () => {
