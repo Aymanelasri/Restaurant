@@ -125,7 +125,6 @@ function RestaurantDashboard() {
   ];
 
   const maxSales = Math.max(...weeklySales.map(day => Math.max(day.orders || 0, day.customers || 0)), 1);
-  const salesGradient = `conic-gradient(#ff2a1a 0% ${Math.min(100, (analytics.totalOrders / Math.max(analytics.totalUsers || 1, 1)) * 100)}%, #f5b800 ${Math.min(100, (analytics.totalOrders / Math.max(analytics.totalUsers || 1, 1)) * 100)}% 100%)`;
 
   return (
     <div className="p-0 p-md-2">

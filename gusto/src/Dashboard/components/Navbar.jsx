@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Bars3Icon, BellIcon } from '@heroicons/react/24/outline';
 
 // The theme is dark-only now, so toggleDarkMode / darkMode props are accepted but unused.
@@ -12,34 +12,7 @@ function Navbar({ setSidebarOpen }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
-  useEffect(() => {
-    const checkUser = () => {
-      const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
-      if (storedUser.name !== user.name) {
-        setUser(storedUser);
-      }
-    };
-    checkUser();
-
-    fetchNotifications();
-    const interval = setInterval(fetchNotifications, 30000);
-
-    // Close dropdowns when clicking outside
-    const handleClickOutside = (e) => {
-      if (!e.target.closest('.dropdown')) {
-        setShowNotifications(false);
-        setShowProfileMenu(false);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      clearInterval(interval);
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
-
-  const fetchNotifications = async () => {
+  const fetchNotifications = useCallback(async () => {
     const token = getStoredToken();
     if (!token) {
       setNotifications([]);
@@ -71,7 +44,34 @@ function Navbar({ setSidebarOpen }) {
     } catch (error) {
       console.error('Failed to fetch notifications', error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const checkUser = () => {
+      const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+      if (storedUser.name !== user.name) {
+        setUser(storedUser);
+      }
+    };
+    checkUser();
+
+    fetchNotifications();
+    const interval = setInterval(fetchNotifications, 30000);
+
+    // Close dropdowns when clicking outside
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.dropdown')) {
+        setShowNotifications(false);
+        setShowProfileMenu(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [fetchNotifications, user.name]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');

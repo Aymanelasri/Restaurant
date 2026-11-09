@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { CogIcon, ShieldCheckIcon, BellIcon, UserIcon, KeyIcon } from '@heroicons/react/24/outline';
+import React, { useState } from 'react';
+import { ShieldCheckIcon, BellIcon, UserIcon, KeyIcon } from '@heroicons/react/24/outline';
 
 function Settings() {
   const user = JSON.parse(localStorage.getItem('user') || '{}');

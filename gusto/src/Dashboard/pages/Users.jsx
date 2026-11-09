@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MagnifyingGlassIcon, PencilIcon, TrashIcon, PlusIcon, EyeIcon } from '@heroicons/react/24/outline';
 
 function Users() {
@@ -14,11 +14,7 @@ function Users() {
   const [editForm, setEditForm] = useState({ name: '', email: '', role: '' });
   const [addForm, setAddForm] = useState({ name: '', email: '', password: '', role: 'customer' });
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     const token = getStoredToken();
     if (!token) {
       setLoading(false);
@@ -44,7 +40,11 @@ function Users() {
       console.error('Error fetching users:', error);
       setLoading(false);
     }
-  };
+  }, [getStoredToken]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
