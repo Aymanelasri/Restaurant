@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Login() {
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:8000/auth/google';
+    window.location.href = 'https://restaurant-bvjt.onrender.com/auth/google';
   };
 
   return (

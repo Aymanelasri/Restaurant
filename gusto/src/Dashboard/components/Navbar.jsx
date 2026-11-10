@@ -20,7 +20,7 @@ function Navbar({ setSidebarOpen }) {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/notifications', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/notifications', {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`,

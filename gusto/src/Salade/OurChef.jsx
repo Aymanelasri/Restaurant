@@ -12,11 +12,11 @@ export default function OurChef() {
 
 	const fetchChefs = async () => {
 		try {
-			const response = await fetch('http://localhost:8000/api/chefs');
+			const response = await fetch('https://restaurant-bvjt.onrender.com/api/chefs');
 			const data = await response.json();
 			setChefs(data.map(chef => ({
 				name: chef.name,
-				img: `http://localhost:8000${chef.image}`
+				img: `https://restaurant-bvjt.onrender.com${chef.image}`
 			})));
 		} catch (error) {
 			console.error('Error fetching chefs:', error);

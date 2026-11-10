@@ -16,7 +16,7 @@ export default function EmailVerification() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8000/api/verify-code', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code })
@@ -40,7 +40,7 @@ export default function EmailVerification() {
 
   const resendCode = async () => {
     try {
-      await fetch('http://localhost:8000/api/send-verification-code', {
+      await fetch('https://restaurant-bvjt.onrender.com/api/send-verification-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

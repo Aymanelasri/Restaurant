@@ -66,7 +66,7 @@ function Chefs() {
         const formDataUpload = new FormData();
         formDataUpload.append('image', imageFile);
         
-        const uploadResponse = await fetch('http://localhost:8000/api/chefs/upload-image', {
+        const uploadResponse = await fetch('https://restaurant-bvjt.onrender.com/api/chefs/upload-image', {
           method: 'POST',
           body: formDataUpload
         });

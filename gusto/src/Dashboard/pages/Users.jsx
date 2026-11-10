@@ -22,7 +22,7 @@ function Users() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/users', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/users', {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ function Users() {
     if (window.confirm('Are you sure you want to delete this user?')) {
       const token = getStoredToken();
       try {
-        await fetch(`http://localhost:8000/api/users/${id}`, {
+        await fetch(`https://restaurant-bvjt.onrender.com/api/users/${id}`, {
           method: 'DELETE',
           headers: {
             Accept: 'application/json',
@@ -80,7 +80,7 @@ function Users() {
   const handleUpdateUser = async () => {
     const token = getStoredToken();
     try {
-      await fetch(`http://localhost:8000/api/users/${selectedUser.id}`, {
+      await fetch(`https://restaurant-bvjt.onrender.com/api/users/${selectedUser.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ function Users() {
     const token = getStoredToken();
     console.log('Adding user:', addForm);
     try {
-      const response = await fetch('http://localhost:8000/api/users', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

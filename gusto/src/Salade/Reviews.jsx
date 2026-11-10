@@ -28,7 +28,7 @@ export default function Reviews() {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
     try {
-      await fetch('http://localhost:8000/api/reviews', {
+      await fetch('https://restaurant-bvjt.onrender.com/api/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({

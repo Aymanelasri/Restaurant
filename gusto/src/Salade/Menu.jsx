@@ -27,14 +27,14 @@ export default function Menu() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/products');
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/products');
       const data = await response.json();
       setDishes(data.map(product => ({
         title: product.name,
         category: product.category || 'General',
         desc: product.description,
         price: parseFloat(product.price).toFixed(2),
-        img: `http://localhost:8000${product.image}`
+        img: `https://restaurant-bvjt.onrender.com${product.image}`
       })));
     } catch (error) {
       console.error('Error fetching products:', error);

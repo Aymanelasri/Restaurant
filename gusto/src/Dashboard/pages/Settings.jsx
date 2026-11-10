@@ -57,7 +57,7 @@ function Settings() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/change-password', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/change-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ function Settings() {
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8000/api/users/${user.id}`, {
+      const response = await fetch(`https://restaurant-bvjt.onrender.com/api/users/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

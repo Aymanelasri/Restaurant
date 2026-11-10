@@ -19,7 +19,7 @@ export default function Login() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8000/api/login', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ export default function Login() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8000/api/verify-code', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/verify-code', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ export default function Login() {
 
           <button 
             className="google-btn"
-            onClick={() => window.location.href = 'http://localhost:8000/auth/google'}
+            onClick={() => window.location.href = 'https://restaurant-bvjt.onrender.com/auth/google'}
           >
             <svg width="18" height="18" viewBox="0 0 18 18">
               <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>

@@ -25,8 +25,8 @@ export default function Reservation() {
   const fetchTables = React.useCallback(async () => {
     try {
       const url = formData.date && formData.time
-        ? `http://localhost:8000/api/tables?date=${formData.date}&time=${formData.time}`
-        : 'http://localhost:8000/api/tables';
+        ? `https://restaurant-bvjt.onrender.com/api/tables?date=${formData.date}&time=${formData.time}`
+        : 'https://restaurant-bvjt.onrender.com/api/tables';
 
       const response = await fetch(url);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -102,7 +102,7 @@ export default function Reservation() {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await fetch('http://localhost:8000/api/reservations', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/reservations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({

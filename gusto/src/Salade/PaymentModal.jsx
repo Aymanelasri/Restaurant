@@ -43,7 +43,7 @@ export default function PaymentModal({ isOpen, onClose, totalAmount, cartItems }
     };
 
     try {
-      const response = await fetch('http://localhost:8000/api/orders', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

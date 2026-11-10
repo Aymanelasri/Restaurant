@@ -25,7 +25,7 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/register', {
+      const response = await fetch('https://restaurant-bvjt.onrender.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -64,7 +64,7 @@ function Products() {
         const formDataUpload = new FormData();
         formDataUpload.append('image', imageFile);
         
-        const uploadResponse = await fetch('http://localhost:8000/api/products/upload-image', {
+        const uploadResponse = await fetch('https://restaurant-bvjt.onrender.com/api/products/upload-image', {
           method: 'POST',
           body: formDataUpload
         });

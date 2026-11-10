@@ -65,7 +65,7 @@ export default function App() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('https://localhost:8000/modules')
+        fetch('https://restaurant-bvjt.onrender.com/modules')
             .then(res => res.json())
             .then(data => {
                 setModules(data);
