@@ -25,9 +25,17 @@ class AuthController extends Controller
         $user->verification_code_expires_at = now()->addMinutes(10);
         $user->save();
 
-        Mail::raw("Your verification code is: $code", function ($message) use ($user) {
-            $message->to($user->email)->subject('Verification Code');
-        });
+        try {
+            Mail::raw("Your verification code is: $code", function ($message) use ($user) {
+                $message->to($user->email)->subject('Verification Code');
+            });
+        } catch (\Throwable $e) {
+            \Log::warning('Verification email could not be sent', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     // Login b email - sift verification code
