@@ -1,24 +1,47 @@
-# PHP CLI image
-FROM php:8.2-cli
+# 1. استخدام PHP 8.2 مع Apache
+FROM php:8.2-apache
 
 
 RUN apt-get update && apt-get install -y \
-    unzip git curl libzip-dev libonig-dev nodejs npm \
-    && docker-php-ext-install zip pdo pdo_mysql
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libpq-dev \
+    zip \
+    unzip \
+    git \
+    curl \
+    libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_pgsql gd zip
 
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 
-WORKDIR /app
-COPY . /app
+WORKDIR /var/www/html
 
 
-RUN composer install --ignore-platform-reqs
-RUN npm install
+COPY . .
 
 
-EXPOSE 8000
+RUN composer install --no-dev --optimize-autoloader
 
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
+
+# 9. تفعيل mod_rewrite لـ Apache
+RUN a2enmod rewrite
+
+# 10. تغيير البورت ليتوافق مع Render ($PORT أو 80)
+ENV PORT=80
+EXPOSE 80
+
+# 11. تشغيل Apache فـ Foreground
+CMD ["apache2-foreground"]
