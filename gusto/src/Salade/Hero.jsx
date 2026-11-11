@@ -15,7 +15,7 @@ const IMAGES = {
   Dessert: "/dessert.webp",
   Drinks: "/drinks.webp",
   Platter: "/platter.webp",
-  Snacks: "/Snacks.webp",
+  Snacks: "/snacks.webp",
 };
 
 // Font Awesome icons for the category pills
