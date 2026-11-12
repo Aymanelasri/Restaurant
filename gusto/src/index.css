@@ -49,8 +49,17 @@ section, [id] {
   scroll-margin-top: 90px;
 }
 
-.bl-page, .ct-page, .menu-section, .auth-page, .cart-page {
+html body, html body *, body *, #root,
+.bl-page, .ct-page, .menu-section, .auth-page, .cart-page,
+.rv-page, .rv-card, .rv-form,
+.blog-page, .blog-card, .blog-content,
+.contacts-page, .ct-card, .ct-form {
   background-color: #050505 !important;
+  background: #050505 !important;
+}
+
+html body, html body *, #root {
+  color: #f5f5f5 !important;
 }
 
 img, svg, video {
