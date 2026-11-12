@@ -1,4 +1,4 @@
-.bl-page { padding: clamp(104px, 14vw, 130px) var(--pad-x, 16px) 0; min-height: 100vh; }
+.bl-page { background: transparent !important; padding: clamp(104px, 14vw, 130px) var(--pad-x, 16px) 0; min-height: 100vh; }
 .bl-wrap { max-width: 820px; margin: 0 auto; }
 .bl-head { text-align: center; margin-bottom: clamp(24px, 5vw, 44px); }
 .bl-head h2 {

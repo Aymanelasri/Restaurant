@@ -21,6 +21,7 @@
 /* Global Mobile-First Styles */
 
 html {
+  background: transparent;
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
   overflow-y: auto;
@@ -28,6 +29,7 @@ html {
 
 body {
   margin: 0;
+  background: transparent !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -40,6 +42,7 @@ body {
 
 #root {
   min-height: 100vh;
+  background: transparent;
   overflow-y: auto;
 }
 

@@ -1,5 +1,5 @@
 /* Contact Layout */
-.ct-page { padding: clamp(104px, 14vw, 130px) var(--pad-x, 16px) 0; min-height: 100vh; }
+.ct-page { background: transparent !important; padding: clamp(104px, 14vw, 130px) var(--pad-x, 16px) 0; min-height: 100vh; }
 .ct-wrap { max-width: 1040px; margin: 0 auto; }
 .ct-head { text-align: center; margin-bottom: clamp(24px, 5vw, 44px); }
 .ct-head h2 {
