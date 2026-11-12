@@ -1,5 +1,5 @@
 .menu-section {
-  background: transparent !important;
+  background: #050505 !important;
   padding: clamp(104px, 13vw, 150px) var(--pad-x, 20px) clamp(40px, 6vw, 80px);
   text-align: center;
   min-height: 100vh;
