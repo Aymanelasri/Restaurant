@@ -1,13 +1,14 @@
 * {
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: #d4af37 #f5f1eb;
+  scrollbar-color: #d4af37 transparent;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
   overflow-y: auto;
+  background: transparent;
 }
 
 body {
@@ -16,11 +17,13 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;
+  background: transparent !important;
   overscroll-behavior-y: smooth;
 }
 
 #root {
   min-height: 100vh;
+  background: transparent;
   overflow-y: auto;
 }
 
@@ -38,7 +41,7 @@ img, svg, video {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f1eb;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -49,6 +52,7 @@ img, svg, video {
 .App {
   text-align: center;
   width: 100%;
+  background: transparent;
   overflow-x: hidden;
 }
 

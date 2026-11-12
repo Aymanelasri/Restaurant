@@ -15,7 +15,7 @@
 * {
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: #d4af37 #f5f1eb;
+  scrollbar-color: #d4af37 transparent;
 }
 
 /* Global Mobile-First Styles */
